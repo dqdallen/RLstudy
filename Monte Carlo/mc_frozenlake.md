@@ -7,6 +7,6 @@ python mc_frozenlake.py
 # 结果
 迭代后，代码中的test部分对其进行测试，运行一次后可以看到已经可以从S到G顺利到达了。
 
-![image1](https://github.com/dqdallen/RLstudy/blob/main/result.png)
+![image1](https://github.com/dqdallen/RLstudy/blob/main/MDP_P_V/result.png)
 
 PS：可能是由于不稳定的问题，有时候迭代后的policy不适用，如果出现结果不对的小伙伴可以多试几次或者调整eps探索。
