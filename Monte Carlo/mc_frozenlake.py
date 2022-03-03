@@ -26,17 +26,18 @@ def on_policy_mc_mg(episode_num, env, gamma, first_every, eps):
             else:
                 reward = -1 
             if first_every == 'every':  # 是every visit 还是first vist
-                a_s.append((action, state))
-                g = reward + gamma * g  # 计算累积回报
+                a_s.append((action, state, reward))
+
             else:
-                if (action, state) not in a_s:
-                    a_s.append((action, state))
-                    g = reward + gamma * g
+                if (action, state, reward) not in a_s:
+                    a_s.append((action, state, reward))
             state = new_state
             if done:
                 break
         # 上述while True得到一条序列后，序列中状态s对应的q值
-        for a, s in reversed(a_s):
+        g = 0
+        for a, s, r in reversed(a_s): # reversed是倒序，使得在计算g的时候距离当前状态越远的系数越小，起到加权的作用
+            g = r + gamma * g
             cnt[s][a] += 1
             q[s][a] += (g - q[s][a]) / cnt[s][a]
             ac = np.argmax(q[s]) # 找到q值最大的对应的动作
@@ -72,13 +73,15 @@ def off_policy_mc_mg(env, gamma, episode_num):
                 done = True
             else:
                 reward = -1 
-            g =  reward + gamma * g
-            a_s.append((action, state))
+            
+            a_s.append((action, state, reward))
             state = new_state
             if done:
                 break
         # w这个变量用于计算重要性采样中的权重
-        for a, s in reversed(a_s):
+        g = 0
+        for a, s, r in reversed(a_s):
+            g =  r + gamma * g
             cnt[s][a] += w
             q[s][a] += w / cnt[s][a] * (g - q[s][a])
             ac = np.argmax(q[s])
@@ -93,12 +96,12 @@ def off_policy_mc_mg(env, gamma, episode_num):
     return policy, q
 
 if __name__ == '__main__':
-    gamma = 1
-    eps = 0.5
-    episode_num = 100000
-    method = 'on'
+    gamma = 0.9
+    eps = 0.1
+    episode_num = 50000
+    method = 'off'
     if method == 'on':
-        first_every = 'every'
+        first_every = 'first'
         p, q = on_policy_mc_mg(episode_num, env, gamma, first_every, eps)
     else:
         p, q = off_policy_mc_mg(env, gamma, episode_num)
