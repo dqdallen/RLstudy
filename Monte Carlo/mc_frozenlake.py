@@ -1,7 +1,7 @@
 import gym
 import numpy as np
 
-env = gym.make("FrozenLake-v0", is_slippery=False)
+env = gym.make("FrozenLake-v0", is_slippery=False) # FrozenLake-v1 FrozenLake-v0都可以，看库的版本
 
 def on_policy_mc_mg(episode_num, env, gamma, first_every, eps):
     policy = np.ones((env.observation_space.n, env.action_space.n)) / env.action_space.n
@@ -109,11 +109,13 @@ if __name__ == '__main__':
     state = env.reset()
     g = 0
     i = 0
+    import time
     while True:
         i += 1
         action = p[state].argmax()
         state, reward, done, _ = env.step(action)
         env.render()
+        time.sleep(1)
         g = reward
         if done:
             break
