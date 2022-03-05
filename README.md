@@ -6,5 +6,8 @@ study reinforcement learning，如果对你有帮助的话，可以给个star哦
 进入Monte Carlo文件夹，可查看其中的md文件
 ### 时序差分方法
 进入TD文件夹，可查看其中的md文件
+### DQN
+进入DQN文件夹，可查看其中的md文件
 ## 联系方式
 dongjidan@126.com
+## 公众号
