@@ -11,3 +11,6 @@ study reinforcement learning，如果对你有帮助的话，可以给个star哦
 ## 联系方式
 dongjidan@126.com
 ## 公众号
+欢迎关注
+
+![gzh](https://github.com/dqdallen/RLstudy/blob/main/gzh.png)
