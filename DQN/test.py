@@ -1,11 +1,12 @@
 import gym
 import torch
-from model import DQN, DQNLoss
+from model import DQN, DQNLoss, Dueling_DQN
 import time
 
 
-dqn = DQN(4, 2)
-dqn.load_state_dict(torch.load('./dqn_catpole.pth'))
+path = './DuelDQN_checkpoint/DuelDQN.pth'  # './dqn_catpole.pth'./NatureDQN_checkpoint/NatureDQN.pth
+dqn = Dueling_DQN(4, 2)
+dqn.load_state_dict(torch.load(path))
 env = gym.make('CartPole-v1')
 state = env.reset()
 env.render()
