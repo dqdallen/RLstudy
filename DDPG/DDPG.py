@@ -8,7 +8,7 @@ import random
 
 
 def train(iter_num, step, replay_size, batch_size, gamma, tau):
-	env = gym.make('Pendulum-v0')
+	env = gym.make('Pendulum-v1')
 	state_num = env.observation_space.shape[0]
 	action_num = env.action_space.shape[0]
 	a_bound = env.action_space.high
