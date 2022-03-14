@@ -1,30 +1,8 @@
 import multiprocessing as mp
 import time
 import os
+import torch
 
-def a(q):
-    
-    for i in range(100):
-        if not q.empty():
-            print(os.getpid())
-            aa = q.get()
-            print(aa)
-            aa += 1
-            q.put(aa)
-            time.sleep(0.5)
-
-if __name__ == '__main__':
-    q = mp.Queue()
-
-    ps = []
-    q.put(1)
-    for i in range(2):
-        
-        p = mp.Process(target=a, args=(q, ))
-        ps.append(p)
-
-    for qq in ps:
-        qq.start()
-
-    for qq in ps:
-        qq.join()
+a = torch.tensor([[1,2], [3,4]])
+b = torch.tensor([[3,4]])
+print(torch.max(a, 1))
